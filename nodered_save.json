@@ -1,0 +1,428 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4ea261a864b00545",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f37b7048cf0ee337",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c34939dc7cd4972d",
+        "type": "ui_tab",
+        "name": "Tab 1",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "879ddb2d57bb0366",
+        "type": "ui_group",
+        "name": "Main",
+        "tab": "c34939dc7cd4972d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cbb30a2ecb47f9af",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "d:hwu:esp8266:iot/evt/status/fmt/json",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4ea261a864b00545",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "9d5ec84b18c0481f",
+                "e1e2ac69dd5da889"
+            ]
+        ]
+    },
+    {
+        "id": "eed2b1331ed79c18",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "d:hwu:esp8266:iot/ord/status/fmt/json",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4ea261a864b00545",
+        "x": 850,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e1e2ac69dd5da889",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Change to readable date",
+        "func": "\nmsg.payload.date = Math.round(parseFloat(msg.payload.date) * 1000);\n//msg.payload = {topic: \"Board press\", payload: msg.payload.board, timestamp: msg.payload.date}\nmsg.topic=\"Board-\" + msg.payload.board\n//mins = 60000ms\nmsg.payload = new Date(msg.payload.date)\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "930c8959e7f5be47"
+            ]
+        ]
+    },
+    {
+        "id": "b721940f7da7c31a",
+        "type": "ui_switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "label": "Enable/Disable System",
+        "tooltip": "",
+        "group": "879ddb2d57bb0366",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "e15f68ebf47b72d9"
+            ]
+        ]
+    },
+    {
+        "id": "e15f68ebf47b72d9",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 1",
+        "func": "if (msg.payload == true) {\n    msg.payload = \"enable\";\n} else {\n    msg.payload = \"disable\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "eed2b1331ed79c18"
+            ]
+        ]
+    },
+    {
+        "id": "b64c5cda9fd4eb28",
+        "type": "ui_text_input",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "label": "Change rate",
+        "tooltip": "",
+        "group": "879ddb2d57bb0366",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "number",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 470,
+        "y": 260,
+        "wires": [
+            [
+                "2fc20698f108155e"
+            ]
+        ]
+    },
+    {
+        "id": "2fc20698f108155e",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "d:hwu:esp8266:mv2021/ord/status/fmt/json",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4ea261a864b00545",
+        "x": 730,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b5f138d64128c6d7",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "930c8959e7f5be47",
+        "type": "ui_toast",
+        "z": "f6f2187d.f17ca8",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 840,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "069807e5051796a3",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "879ddb2d57bb0366",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 930,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d5ec84b18c0481f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Change to readable date and graphs",
+        "func": "msg.payload.date = Math.round(parseFloat(msg.payload.date) * 1000);\nmsg.timestamp = msg.payload.date\n//let variable = new Date(msg.payload.date - msg.payload.date % 1000)\n//msg.payload = {topic: \"Board press\", payload: msg.payload.board, timestamp: msg.payload.date}\nmsg.topic = \"Board-\" + msg.payload.board\nmsg.payload = 1\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 60,
+        "wires": [
+            [
+                "b5f138d64128c6d7",
+                "e4cd53bd2d7c6b17"
+            ]
+        ]
+    },
+    {
+        "id": "e4cd53bd2d7c6b17",
+        "type": "bar-chart-data",
+        "z": "f6f2187d.f17ca8",
+        "name": "bar-chart-data",
+        "x_interval": "minutes",
+        "x_size": "25",
+        "unit": "",
+        "precision": 2,
+        "is_meter_reading": "False",
+        "agg_by": "sum",
+        "x": 760,
+        "y": 100,
+        "wires": [
+            [
+                "069807e5051796a3"
+            ]
+        ]
+    }
+]
