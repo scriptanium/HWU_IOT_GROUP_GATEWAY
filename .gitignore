@@ -1,0 +1,5 @@
+.vscode
+.venv
+certs/*.crt
+certs/*.pem
+config.ini

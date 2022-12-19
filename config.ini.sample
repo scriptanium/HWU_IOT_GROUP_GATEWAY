@@ -1,0 +1,15 @@
+[SERIAL]
+serialports = /dev/ttyUSB0
+speed = 115200
+timeout = 0.5
+
+[MQTT]
+port = 8883
+qos = 1
+address = test.mosquitto.org
+publish_topic =
+subscribe_topic =
+ca_cert =
+; cert = 
+; key =
+; password = 
